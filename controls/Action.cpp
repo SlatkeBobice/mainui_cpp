@@ -159,7 +159,7 @@ void CMenuAction::Draw( )
 
 	if( iFlags & QMF_GRAYED )
 	{
-		UI_DrawString( font, m_scPos, m_scSize, szName, uiColorDkGrey, m_scChSize, eTextAlignment, textflags | ETF_FORCECOL );
+		UI_DrawString( font, m_scPos, m_scSize, szName, uiColorWhite, m_scChSize, eTextAlignment, textflags | ETF_FORCECOL );
 		return; // grayed
 	}
 
