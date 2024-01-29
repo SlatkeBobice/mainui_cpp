@@ -191,9 +191,9 @@ void CMenuKeysModel::Update( void )
 			if( !pfile ) break;	// technically an error
 
 			if( token[0] == '#' )
-				snprintf( name[i], sizeof( name[i] ), "^6%s^7", L( token ));
+				snprintf( name[i], sizeof( name[i] ), "^7%s^7", L( token ));
 			else
-				snprintf( name[i], sizeof( name[i] ), "^6%s^7", token );
+				snprintf( name[i], sizeof( name[i] ), "^7%s^7", token );
 
 			keysBind[i][0] = firstKey[i][0] = secondKey[i][0] = 0;
 			i++;
@@ -210,9 +210,9 @@ void CMenuKeysModel::Update( void )
 			if( !pfile ) break; // technically an error
 
 			if( token[0] == '#' )
-				snprintf( name[i], sizeof( name[i] ), "^6%s^7", L( token ));
+				snprintf( name[i], sizeof( name[i] ), "^7%s^7", L( token ));
 			else
-				snprintf( name[i], sizeof( name[i] ), "^6%s^7", token );
+				snprintf( name[i], sizeof( name[i] ), "^7%s^7", token );
 
 			if( keys[0] != -1 )
 			{
@@ -220,8 +220,8 @@ void CMenuKeysModel::Update( void )
 
 				if( str )
 					if( !strnicmp( str, "MOUSE", 5 ) )
-						snprintf( firstKey[i], 20, "^5%s^7", str );
-					else snprintf( firstKey[i], 20, "^3%s^7", str );
+						snprintf( firstKey[i], 20, "^7%s^7", str );
+					else snprintf( firstKey[i], 20, "^7%s^7", str );
 				else firstKey[i][0] = 0;
 			}
 
@@ -231,8 +231,8 @@ void CMenuKeysModel::Update( void )
 
 				if( str )
 					if( !strnicmp( str, "MOUSE", 5 ) )
-						snprintf( secondKey[i], 20, "^5%s^7", str );
-					else snprintf( secondKey[i], 20, "^3%s^7", str );
+						snprintf( secondKey[i], 20, "^7%s^7", str );
+					else snprintf( secondKey[i], 20, "^7%s^7", str );
 				else secondKey[i][0] = 0;
 			}
 
@@ -382,23 +382,23 @@ void CMenuControls::_Init( void )
 
 	keysList.SetRect( 360, 230, -20, 465 );
 	keysList.SetModel( &keysListModel );
-	keysList.SetupColumn( 0, L( "GameUI_Action" ), 0.50f );
-	keysList.SetupColumn( 1, L( "GameUI_KeyButton" ), 0.25f );
-	keysList.SetupColumn( 2, L( "GameUI_Alternate" ), 0.25f );
+	keysList.SetupColumn( 0, L( "Действие" ), 0.50f );
+	keysList.SetupColumn( 1, L( "Кнопка" ), 0.25f );
+	keysList.SetupColumn( 2, L( "Альтернатива" ), 0.25f );
 
-	msgBox1.SetMessage( L( "Press a key or button" ) );
+	msgBox1.SetMessage( L( "На кнопку жми" ) );
 	msgBox1.Link( this );
 
-	msgBox2.SetMessage( L( "GameUI_KeyboardSettingsText" ) );
+	msgBox2.SetMessage( L( "По умолчанию оформить?" ) );
 	msgBox2.onPositive = VoidCb( &CMenuControls::ResetKeysList );
 	msgBox2.Link( this );
 
 	AddItem( banner );
-	AddButton( L( "GameUI_UseDefaults" ), L( "GameUI_KeyboardSettingsText" ), PC_USE_DEFAULTS, msgBox2.MakeOpenEvent() );
-	AddButton( L( "Adv. Controls" ), L( "Change mouse sensitivity, enable autoaim, mouselook and crosshair" ), PC_ADV_CONTROLS, UI_AdvControls_Menu );
-	AddButton( L( "GameUI_OK" ), L( "Save changed and return to configuration menu" ), PC_DONE,
+	AddButton( L( "GameUI_UseDefaults" ), L( NULL ), PC_USE_DEFAULTS, msgBox2.MakeOpenEvent() );
+	AddButton( L( "Adv. Controls" ), L( NULL ), PC_ADV_CONTROLS, UI_AdvControls_Menu );
+	AddButton( L( "GameUI_OK" ), L( NULL ), PC_DONE,
 		VoidCb( &CMenuControls::SaveAndPopMenu ) );
-	AddButton( L( "GameUI_Cancel" ), L( "Discard changes and return to configuration menu" ), PC_CANCEL,
+	AddButton( L( "GameUI_Cancel" ), L( NULL ), PC_CANCEL,
 		VoidCb( &CMenuControls::Cancel ) );
 	AddItem( keysList );
 }
