@@ -41,12 +41,12 @@ EMPTY_STRINGS_10, // 170..179
 EMPTY_STRINGS_5, // 180..184
 EMPTY_STRINGS_2, // 185..186
 EMPTY_STRINGS_1, // 187
-"Return to game.", // 188
-"Start a new game.", // 189
-EMPTY_STRINGS_1,	// 190
-"Load a previously saved game.", // 191
-"Load a saved game, save the current game.", // 192
-"Change game settings, configure controls", // 193
+EMPTY_STRINGS_1, // 188
+EMPTY_STRINGS_1, // 189
+EMPTY_STRINGS_1, // 190
+EMPTY_STRINGS_1, // 191
+EMPTY_STRINGS_1, // 192
+EMPTY_STRINGS_1, // 193
 EMPTY_STRINGS_20, // 194..213
 EMPTY_STRINGS_20, // 214..233
 "Starting a Hazard Course will exit\nany current game, OK to exit?", // 234
