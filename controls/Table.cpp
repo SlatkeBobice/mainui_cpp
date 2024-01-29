@@ -611,7 +611,8 @@ void CMenuTable::DrawLine( Point p, int line, uint textColor, bool forceCol, uin
 void CMenuTable::Draw()
 {
 	int i, y;
-	int selColor = PackRGB( 80, 56, 24 );
+	int selColor = PackRGB( 150, 150, 150 );
+	int highColor = PackRGB( 50, 50, 50 );
 	int upFocus, downFocus, scrollbarFocus;
 
 	// HACKHACK: recalc iNumRows, to be not greater than iNumItems
@@ -770,7 +771,7 @@ void CMenuTable::Draw()
 			}
 			else if( i == iHighlight )
 			{
-				fillColor = 0x80383838;
+				fillColor = highColor;
 			}
 		}
 
