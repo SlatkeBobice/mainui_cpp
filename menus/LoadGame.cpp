@@ -267,22 +267,22 @@ UI_LoadGame_Init
 */
 void CMenuLoadGame::_Init( void )
 {
-	save.SetNameAndStatus( L( "GameUI_Save" ), L( "Save current game" ) );
+	save.SetNameAndStatus( L( "GameUI_Save" ), L( NULL ) );
 	save.SetPicture( PC_SAVE_GAME );
 	save.onReleased = VoidCb( &CMenuLoadGame::SaveGame );
 	save.SetCoord( 72, 230 );
 
-	load.SetNameAndStatus( L( "GameUI_Load" ), L( "Load saved game" ) );
+	load.SetNameAndStatus( L( "GameUI_Load" ), L( NULL ) );
 	load.SetPicture( PC_LOAD_GAME );
 	load.onReleased = VoidCb( &CMenuLoadGame::LoadGame );
 	load.SetCoord( 72, 230 );
 
-	remove.SetNameAndStatus( L( "Delete" ), L( "Delete saved game" ) );
+	remove.SetNameAndStatus( L( "Delete" ), L( NULL ) );
 	remove.SetPicture( PC_DELETE );
 	remove.onReleased = msgBox.MakeOpenEvent();
 	remove.SetCoord( 72, 280 );
 
-	cancel.SetNameAndStatus( L( "GameUI_Cancel" ), L( "Return back to main menu" ) );
+	cancel.SetNameAndStatus( L( "GameUI_Cancel" ), L( NULL ) );
 	cancel.SetPicture( PC_CANCEL );
 	cancel.onReleased = VoidCb( &CMenuLoadGame::Hide );
 	cancel.SetCoord( 72, 330 );
@@ -290,15 +290,15 @@ void CMenuLoadGame::_Init( void )
 	savesList.szName = hintText;
 	savesList.onChanged = VoidCb( &CMenuLoadGame::UpdateGame );
 	// savesList.onDeleteEntry = msgBox.MakeOpenEvent();
-	savesList.SetupColumn( 0, L( "GameUI_Time" ), 0.30f );
-	savesList.SetupColumn( 1, L( "GameUI_Game" ), 0.55f );
-	savesList.SetupColumn( 2, L( "GameUI_ElapsedTime" ), 0.15f );
+	savesList.SetupColumn( 0, L( "Дата" ), 0.30f );
+	savesList.SetupColumn( 1, L( "Карта" ), 0.55f );
+	savesList.SetupColumn( 2, L( "Время" ), 0.15f );
 
 	savesList.SetModel( &savesListModel );
 	savesList.SetCharSize( QM_SMALLFONT );
 	savesList.SetRect( 360, 230, -20, 465 );
 
-	msgBox.SetMessage( L( "Delete this saved game?" ) );
+	msgBox.SetMessage( L( "Удалить этот сейв?" ) );
 	msgBox.onPositive = VoidCb( &CMenuLoadGame::DeleteGame );
 	msgBox.Link( this );
 
