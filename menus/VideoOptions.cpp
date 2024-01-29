@@ -168,7 +168,7 @@ void CMenuVidOptions::_Init( void )
 	int height = 280;
 
 #if LEGACY_VIEWSIZE
-	screenSize.SetNameAndStatus( L( "Screen size" ), L( "Set the screen size" ) );
+	screenSize.SetNameAndStatus( L( "Размер экрана" ), L( NULL ) );
 	screenSize.SetCoord( 72, height );
 	screenSize.Setup( 30, 120, 10 );
 	screenSize.onChanged = CMenuEditable::WriteCvarCb;
@@ -176,7 +176,7 @@ void CMenuVidOptions::_Init( void )
 	height += 60;
 #endif
 
-	gammaIntensity.SetNameAndStatus( L( "GameUI_Gamma" ), L( "Set gamma value" ) );
+	gammaIntensity.SetNameAndStatus( L( "Гамма" ), L( NULL ) );
 	gammaIntensity.SetCoord( 72, height );
 	gammaIntensity.Setup( 0.0, 1.0, 0.025 );
 	gammaIntensity.onChanged = VoidCb( &CMenuVidOptions::UpdateConfig );
@@ -184,35 +184,35 @@ void CMenuVidOptions::_Init( void )
 	height += 60;
 
 	glareReduction.SetCoord( 72, height );
-	glareReduction.SetNameAndStatus( L( "GameUI_Brightness" ), L( "Set brightness level" ) );
+	glareReduction.SetNameAndStatus( L( "Хуяма" ), L( NULL ) );
 	glareReduction.Setup( 0, 1.0, 0.025 );
 	glareReduction.onChanged = VoidCb( &CMenuVidOptions::UpdateConfig );
 	glareReduction.onCvarGet = VoidCb( &CMenuVidOptions::GetConfig );
 	height += 60;
 
-	done.SetNameAndStatus( L( "GameUI_OK" ), L( "Go back to the Video Menu" ) );
+	done.SetNameAndStatus( L( "Похуй" ), L( NULL ) );
 	done.SetCoord( 72, height );
 	done.SetPicture( PC_DONE );
 	done.onReleased = VoidCb( &CMenuVidOptions::SaveAndPopMenu );
 	height += 60;
 
-	detailtex.SetNameAndStatus( L( "Detail textures" ), L( "Use detail textures if possible" ));
+	detailtex.SetNameAndStatus( L( "Графодроч" ), L( NULL ));
 	detailtex.SetCoord( 72, height );
 	height += 50;
 
-	vbo.SetNameAndStatus( L( "Use VBO" ), L( "Use new world renderer. Faster, but rarely glitchy" ) );
+	vbo.SetNameAndStatus( L( "Новый рендер мира" ), L( NULL ) );
 	vbo.SetCoord( 72, height );
 	height += 50;
 
-	swwater.SetNameAndStatus( L( "Water ripples"), L( "Enable water ripple effect, like in software-mode GoldSrc" ));
+	swwater.SetNameAndStatus( L( "Блинчики на воде"), L( NULL ));
 	swwater.SetCoord( 72, height );
 	height += 50;
 
-	overbright.SetNameAndStatus( L( "Overbrights" ), L( "Enable overbrights, makes lighting less flat in bright areas" ));
+	overbright.SetNameAndStatus( L( "Ярко пиздец" ), L( NULL ));
 	overbright.SetCoord( 72, height );
 	height += 50;
 
-	filtering.SetNameAndStatus( L( "Texture filtering" ), L( "Enable texture filtering, makes textures smoother" ));
+	filtering.SetNameAndStatus( L( "Мыло ебаное" ), L( NULL ));
 	filtering.SetCoord( 72, height );
 	height += 50;
 
