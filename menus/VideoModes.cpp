@@ -163,8 +163,8 @@ void CMenuVidModesModel::Update( void )
 {
 	unsigned int i;
 
-	m_szModes[0] = L( "<Current window size>" );
-	m_szModes[1] = L( "<Desktop size>" );
+	m_szModes[0] = L( "<Текущий размер окна>" );
+	m_szModes[1] = L( "<Размер рабочего стола>" );
 
 	for( i = VID_MODES_POS; i < 64 - VID_MODES_POS; i++ )
 	{
@@ -278,7 +278,7 @@ void CMenuVidModes::Draw()
 	{
 		if( testModeTimer - gpGlobals->time > 0 )
 		{
-			snprintf( testModeMsg, sizeof( testModeMsg ) - 1, L( "Keep this resolution? %i seconds remaining" ), (int)(testModeTimer - gpGlobals->time) );
+			snprintf( testModeMsg, sizeof( testModeMsg ) - 1, L( "Точно это? %i секунд осталось" ), (int)(testModeTimer - gpGlobals->time) );
 			testModeMsg[sizeof(testModeMsg)-1] = 0;
 		}
 		else
@@ -299,16 +299,16 @@ void CMenuVidModes::_Init( void )
 {
 	static const char *windowModeStr[] =
 	{
-		L( "Windowed" ),
-		L( "Fullscreen" ),
-		L( "Borderless" ),
+		L( "Оконный" ),
+		L( "Полный экран" ),
+		L( "Без рамок" ),
 	};
 	static CStringArrayModel windowModeModel( windowModeStr, V_ARRAYSIZE( windowModeStr ));
 
 	banner.SetPicture(ART_BANNER);
 
 	vidList.SetRect( 360, 230, -20, 365 );
-	vidList.SetupColumn( 0, L( "GameUI_Resolution" ), 1.0f );
+	vidList.SetupColumn( 0, L( "Разрешение" ), 1.0f );
 	vidList.SetModel( &vidListModel );
 
 	SET_EVENT_MULTI( vidList.onChanged,
@@ -318,7 +318,7 @@ void CMenuVidModes::_Init( void )
 			parent->vidList.SetCurrentIndex( VID_AUTOMODE_POS );
 	});
 
-	vsync.SetNameAndStatus( L( "GameUI_VSync" ), L( "GameUI_VSync" ) );
+	vsync.SetNameAndStatus( L( "Вертикальная синька" ), L( NULL ) );
 	vsync.SetCoord( 360, 670 );
 	vsync.LinkCvar( "gl_vsync" );
 
@@ -328,7 +328,7 @@ void CMenuVidModes::_Init( void )
 	testModeMsgBox.Link( this );
 
 	renderersModel.Update();
-	renderers.szName = L( "GameUI_Renderer" );
+	renderers.szName = L( "Рендер игры" );
 	renderers.Setup( &renderersModel );
 	renderers.SetRect( 80, 480, 250, 32 );
 	renderers.SetCharSize( QM_SMALLFONT );
@@ -336,7 +336,7 @@ void CMenuVidModes::_Init( void )
 	renderers.onCvarWrite = VoidCb( &CMenuVidModes::WriteRendererConfig );
 	renderers.bUpdateImmediately = true;
 
-	windowMode.SetNameAndStatus( L( "Window mode" ), L( "Select desired window mode" ) );
+	windowMode.SetNameAndStatus( L( "Режим видео" ), L( NULL ) );
 	windowMode.Setup( &windowModeModel );
 	windowMode.SetRect( 80, 550, 250, 32 );
 	windowMode.SetCharSize( QM_SMALLFONT );
@@ -349,8 +349,8 @@ void CMenuVidModes::_Init( void )
 	});
 
 	AddItem( banner );
-	AddButton( L( "GameUI_Apply" ), L( "Apply changes" ), PC_OK, VoidCb( &CMenuVidModes::SetConfig ) );
-	AddButton( L( "GameUI_Cancel" ), L( "Return back to previous menu" ), PC_CANCEL, VoidCb( &CMenuVidModes::Hide ) );
+	AddButton( L( "Похуй" ), L( NULL ), PC_OK, VoidCb( &CMenuVidModes::SetConfig ) );
+	AddButton( L( "Нахуй" ), L( NULL ), PC_CANCEL, VoidCb( &CMenuVidModes::Hide ) );
 	AddItem( renderers );
 	AddItem( windowMode );
 	AddItem( vsync );
