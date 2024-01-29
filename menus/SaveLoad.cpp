@@ -43,12 +43,6 @@ UI_SaveLoad_Init
 */
 void CMenuSaveLoad::_Init( void )
 {
-	snprintf( hintText, sizeof( hintText ),
-		L( "During play, you can quickly save your game by pressing %s.\n"
-		"Load this game again by pressing %s." ),
-		EngFuncs::KeynumToString( KEY_GetKey( "save quick" ) ),
-		EngFuncs::KeynumToString( KEY_GetKey( "load quick" ) ) );
-
 	banner.SetPicture( ART_BANNER );
 
 	hintMessage.iFlags = QMF_INACTIVE;
@@ -58,9 +52,9 @@ void CMenuSaveLoad::_Init( void )
 	hintMessage.SetCoord( 360, 480 );
 
 	AddItem( banner );
-	AddButton( L( "GameUI_LoadGame" ), L( "GameUI_LoadGameHelp" ), PC_LOAD_GAME, UI_LoadGame_Menu, QMF_NOTIFY );
-	AddButton( L( "GameUI_SaveGame" ), L( "GameUI_SaveGameHelp" ), PC_SAVE_GAME, UI_SaveGame_Menu, QMF_NOTIFY );
-	AddButton( L( "Done" ), L( "Go back to the Main menu" ), PC_DONE, VoidCb( &CMenuSaveLoad::Hide ), QMF_NOTIFY );
+	AddButton( L( "GameUI_LoadGame" ), L( NULL ), PC_LOAD_GAME, UI_LoadGame_Menu, QMF_NOTIFY );
+	AddButton( L( "GameUI_SaveGame" ), L( NULL ), PC_SAVE_GAME, UI_SaveGame_Menu, QMF_NOTIFY );
+	AddButton( L( "Done" ), L( NULL ), PC_DONE, VoidCb( &CMenuSaveLoad::Hide ), QMF_NOTIFY );
 	AddItem( hintMessage );
 }
 
