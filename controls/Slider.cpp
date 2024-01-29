@@ -24,7 +24,7 @@ CMenuSlider::CMenuSlider() : BaseClass(), m_flMinValue(), m_flMaxValue(), m_flCu
 {
 	m_iSliderOutlineWidth = 6;
 
-	size.w = 200;
+	size.w = 300;
 	size.h = 2 + m_iSliderOutlineWidth * 2;
 
 	m_flRange = 1.0f;
