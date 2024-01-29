@@ -52,9 +52,6 @@ private:
 	CMenuCheckBox noDSP;
 	CMenuCheckBox useAlphaDSP;
 	CMenuCheckBox muteFocusLost;
-	CMenuCheckBox vibrationEnable;
-
-	float oldVibrate;
 };
 
 /*
@@ -73,24 +70,6 @@ void CMenuAudio::GetConfig( void )
 	noDSP.LinkCvar( "dsp_off" );
 	useAlphaDSP.LinkCvar( "dsp_coeff_table" );
 	muteFocusLost.LinkCvar( "snd_mute_losefocus" );
-	vibrationEnable.LinkCvar( "vibration_enable" );
-
-	if( !vibrationEnable.bChecked )
-		vibration.SetGrayed( true );
-	oldVibrate = vibration.GetCurrentValue();
-}
-
-void CMenuAudio::VibrateChanged()
-{
-	float newVibrate = vibration.GetCurrentValue();
-	if( oldVibrate != newVibrate )
-	{
-		char cmd[64];
-		snprintf( cmd, 64, "vibrate %f", newVibrate );
-		EngFuncs::ClientCmd( FALSE, cmd );
-		vibration.WriteCvar();
-		oldVibrate = newVibrate;
-	}
 }
 
 /*
@@ -103,12 +82,10 @@ void CMenuAudio::SaveAndPopMenu()
 	soundVolume.WriteCvar();
 	musicVolume.WriteCvar();
 	suitVolume.WriteCvar();
-	vibration.WriteCvar();
 	lerping.WriteCvar();
 	noDSP.WriteCvar();
 	useAlphaDSP.WriteCvar();
 	muteFocusLost.WriteCvar();
-	vibrationEnable.WriteCvar();
 
 	CMenuFramework::SaveAndPopMenu();
 }
@@ -122,59 +99,47 @@ void CMenuAudio::_Init( void )
 {
 	static const char *lerpingStr[] =
 	{
-		L( "GameUI_Disable" ), L( "Balance" ), L( "Quality" )
+		L( "Отрубить" ), L( "Баланс" ), L( "Качественно" )
 	};
 
 	banner.SetPicture(ART_BANNER);
 
-	soundVolume.SetNameAndStatus( L( "GameUI_SoundEffectVolume" ), L( "Set master volume level" ) );
+	soundVolume.SetNameAndStatus( L( "Громкость игры" ), L( NULL ) );
 	soundVolume.Setup( 0.0, 1.0, 0.05f );
 	soundVolume.onChanged = CMenuEditable::WriteCvarCb;
 	soundVolume.SetCoord( 320, 280 );
 
-	musicVolume.SetNameAndStatus( L( "GameUI_MP3Volume" ), L( "Set background music volume level" ) );
+	musicVolume.SetNameAndStatus( L( "Громкость музыки" ), L( NULL ) );
 	musicVolume.Setup( 0.0, 1.0, 0.05f );
 	musicVolume.onChanged = CMenuEditable::WriteCvarCb;
 	musicVolume.SetCoord( 320, 340 );
 
-	suitVolume.SetNameAndStatus( L( "GameUI_HEVSuitVolume" ), L( "Set suit volume level" ) );
+	suitVolume.SetNameAndStatus( L( "Громкость костюма" ), L( NULL ) );
 	suitVolume.Setup( 0.0, 1.0, 0.05f );
 	suitVolume.onChanged = CMenuEditable::WriteCvarCb;
 	suitVolume.SetCoord( 320, 400 );
 
 	static CStringArrayModel model( lerpingStr, V_ARRAYSIZE( lerpingStr ));
-	lerping.SetNameAndStatus( L( "Sound interpolation" ), L( "Enable/disable interpolation on sound output" ) );
+	lerping.SetNameAndStatus( L( "Интерпол звука" ), L( NULL ) );
 	lerping.Setup( &model );
 	lerping.onChanged = CMenuEditable::WriteCvarCb;
 	lerping.font = QM_SMALLFONT;
 	lerping.SetRect( 320, 470, 300, 32 );
 
-	noDSP.SetNameAndStatus( L( "Disable DSP effects" ), L( "Disable sound processing (like echo, flanger, etc)" ) );
+	noDSP.SetNameAndStatus( L( "Выкл. звуковые эффектики" ), L( NULL ) );
 	noDSP.onChanged = CMenuEditable::WriteCvarCb;
 	noDSP.SetCoord( 320, 520 );
 
-	useAlphaDSP.SetNameAndStatus( L( "Use Alpha DSP effects" ), L( "Enables alternative coefficients table" ));
+	useAlphaDSP.SetNameAndStatus( L( "Использовать эффектики из альфы" ), L( NULL ));
 	useAlphaDSP.onChanged = CMenuEditable::WriteCvarCb;
 	useAlphaDSP.SetCoord( 320, 570 );
 
-	muteFocusLost.SetNameAndStatus( L( "Mute when inactive" ), L( "Disable sound when game goes into background" ) );
+	muteFocusLost.SetNameAndStatus( L( "Заткнуть когда фоном" ), L( NULL ) );
 	muteFocusLost.onChanged = CMenuEditable::WriteCvarCb;
 	muteFocusLost.SetCoord( 320, 620 );
 
-	vibrationEnable.SetNameAndStatus( L( "Enable vibration" ), L( "In-game vibration(when player injured, etc)" ) );
-	vibrationEnable.iMask = (QMF_GRAYED|QMF_INACTIVE);
-	vibrationEnable.bInvertMask = true;
-	vibrationEnable.onChanged = CMenuCheckBox::BitMaskCb;
-	vibrationEnable.onChanged.pExtra = &vibration.iFlags;
-	vibrationEnable.SetCoord( 700, 470 );
-
-	vibration.SetNameAndStatus( L( "Vibration" ), L( "Default vibration length" ) );
-	vibration.Setup( 0.0f, 5.0f, 0.05f );
-	vibration.onChanged = VoidCb( &CMenuAudio::VibrateChanged );
-	vibration.SetCoord( 700, 570 );
-
 	AddItem( banner );
-	AddButton( L( "Done" ), L( "Go back to the Configuration Menu" ), PC_DONE,
+	AddButton( L( "Применить" ), L( NULL ), PC_DONE,
 		VoidCb( &CMenuAudio::SaveAndPopMenu ) );
 	AddItem( soundVolume );
 	AddItem( musicVolume );
@@ -183,8 +148,6 @@ void CMenuAudio::_Init( void )
 	AddItem( noDSP );
 	AddItem( useAlphaDSP );
 	AddItem( muteFocusLost );
-	AddItem( vibrationEnable );
-	AddItem( vibration );
 }
 
 void CMenuAudio::_VidInit( )
